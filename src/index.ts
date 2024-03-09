@@ -1,7 +1,8 @@
-import changeCase from "change-case";
+import changeCase from 'change-case';
+import { CamelCase } from './types/camel';
 
-export function camelCase<T extends string>(input: T) {
-    return changeCase.camelCase(input);
+export function camelCase<T extends string>(input: T): CamelCase<T> {
+    return changeCase.camelCase(input) as CamelCase<T>;
 }
 
 export function capitalCase<T extends string>(input: T) {
