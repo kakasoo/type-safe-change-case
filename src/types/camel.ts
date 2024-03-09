@@ -4,22 +4,20 @@ import { IsStringLiteral } from './common';
 import { StringArrayToPascalCase } from './pascal';
 import { IsSnakeCase } from './snake';
 
-export type SnakeToCamel<SnakeCase extends string> = Uncapitalize<
-    StringArrayToPascalCase<StringType.Split<SnakeCase, '_'>>
->;
-
 export type CapitalToCamel<CapitalCase extends string> = Uncapitalize<StringArrayToPascalCase<Split<CapitalCase, ' '>>>;
 
 export type CamelCase<T extends string> = T extends ''
     ? ''
     : IsStringLiteral<T> extends true
-      ? IsSnakeCase<T> extends true
-          ? SnakeToCamel<T>
-          : StringType.Includes<T, ' '> extends true // capital case
+      ? StringType.Includes<T, '_'> extends true // snake_case, Snake_Case
+          ? Uncapitalize<StringArrayToPascalCase<StringType.Split<T, '_'>>>
+          : StringType.Includes<T, ' '> extends true // CAPITAL_CASE, no case
             ? Uncapitalize<StringArrayToPascalCase<StringType.Split<T, ' '>>>
-            : StringType.Includes<T, '.'> extends true // dot case
+            : StringType.Includes<T, '.'> extends true // dot.case
               ? Uncapitalize<StringArrayToPascalCase<StringType.Split<T, '.'>>>
-              : StringType.Includes<T, '-'> extends true // dot case
+              : StringType.Includes<T, '-'> extends true // kebab-case
                 ? Uncapitalize<StringArrayToPascalCase<StringType.Split<T, '-'>>>
-                : Uncapitalize<T>
+                : StringType.Includes<T, '/'> extends true // path/case
+                  ? Uncapitalize<StringArrayToPascalCase<StringType.Split<T, '/'>>>
+                  : Uncapitalize<T> // PascalCase
       : string;

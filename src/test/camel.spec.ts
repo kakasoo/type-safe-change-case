@@ -115,4 +115,26 @@ describe('camelCase test', () => {
             assert.equal(changeCase.camelCase('this-is-an-example'), 'thisIsAnExample');
         });
     });
+
+    describe('no case to camelCase', () => {
+        it('convert no case to camelCase', async () => {
+            type Answer = CamelCase<'this is an example'>;
+            assert.equal(typia.random<Answer>(), 'thisIsAnExample');
+            assert.equal(typia.random<ReturnType<typeof camelCase<'this is an example'>>>(), 'thisIsAnExample');
+
+            const changeCase = await eval('import("change-case")');
+            assert.equal(changeCase.camelCase('this is an example'), 'thisIsAnExample');
+        });
+    });
+
+    describe('path/case to camelCase', () => {
+        it('convert no case to camelCase', async () => {
+            type Answer = CamelCase<'this/is/an/example'>;
+            assert.equal(typia.random<Answer>(), 'thisIsAnExample');
+            assert.equal(typia.random<ReturnType<typeof camelCase<'this/is/an/example'>>>(), 'thisIsAnExample');
+
+            const changeCase = await eval('import("change-case")');
+            assert.equal(changeCase.camelCase('this/is/an/example'), 'thisIsAnExample');
+        });
+    });
 });
