@@ -22,7 +22,9 @@
         "change-case",
         "camel-case",
         "pascal-case",
-        "kebab-case"
+        "kebab-case",
+        "dot.case",
+        "no case"
     ],
     "author": "kakasoo <kscodebase@gmail.com>",
     "license": "ISC",

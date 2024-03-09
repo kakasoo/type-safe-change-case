@@ -23,6 +23,17 @@ describe('camelCase test', () => {
         assert.equal(changeCase.camelCase('hello'), 'hello');
     });
 
+    describe('camelCase to camelCase', () => {
+        it('converts camelCase to camelCase', async () => {
+            type Answer = CamelCase<'thisIsAnExample'>;
+            assert.equal(typia.random<Answer>(), 'thisIsAnExample');
+            assert.equal(typia.random<ReturnType<typeof camelCase<'thisIsAnExample'>>>(), 'thisIsAnExample');
+
+            const changeCase = await eval('import("change-case")');
+            assert.equal(changeCase.camelCase('thisIsAnExample'), 'thisIsAnExample');
+        });
+    });
+
     describe('capital case to camelCase', () => {
         it('converts Capital Case to camelCase', async () => {
             type Answer = CamelCase<'This Is An Example'>;
@@ -157,6 +168,28 @@ describe('camelCase test', () => {
 
             const changeCase = await eval('import("change-case")');
             assert.equal(changeCase.camelCase('This is an example'), 'thisIsAnExample');
+        });
+    });
+
+    describe('camelCaseAnd-kebab', () => {
+        it('convert camelCaseAnd-kebab to camelCase', async () => {
+            type Answer = CamelCase<'thisIsAn-example'>;
+            assert.equal(typia.random<Answer>(), 'thisIsAnExample');
+            assert.equal(typia.random<ReturnType<typeof camelCase<'thisIsAn-example'>>>(), 'thisIsAnExample');
+
+            const changeCase = await eval('import("change-case")');
+            assert.equal(changeCase.camelCase('thisIsAn-example'), 'thisIsAnExample');
+        });
+    });
+
+    describe('snake_and-kebab to camelCase', () => {
+        it('convert snake_and-kebab to camelCase', async () => {
+            type Answer = CamelCase<'this_is_an-example'>;
+            assert.equal(typia.random<Answer>(), 'thisIsAnExample');
+            assert.equal(typia.random<ReturnType<typeof camelCase<'this_is_an-example'>>>(), 'thisIsAnExample');
+
+            const changeCase = await eval('import("change-case")');
+            assert.equal(changeCase.camelCase('this_is_an-example'), 'thisIsAnExample');
         });
     });
 });
