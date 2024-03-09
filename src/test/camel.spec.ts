@@ -34,26 +34,6 @@ describe('camelCase test', () => {
         });
     });
 
-    describe('snake case to camelCase', () => {
-        it('handles string with single underscore', async () => {
-            type Answer = CamelCase<'hello_world'>;
-            assert.equal(typia.random<Answer>(), 'helloWorld');
-            assert.equal(typia.random<ReturnType<typeof camelCase<'hello_world'>>>(), 'helloWorld');
-
-            const changeCase = await eval('import("change-case")');
-            assert.equal(changeCase.camelCase('hello_world'), 'helloWorld');
-        });
-
-        it('converts snake_case to camelCase', async () => {
-            type Answer = CamelCase<'this_is_an_example'>;
-            assert.equal(typia.random<Answer>(), 'thisIsAnExample');
-            assert.equal(typia.random<ReturnType<typeof camelCase<'this_is_an_example'>>>(), 'thisIsAnExample');
-
-            const changeCase = await eval('import("change-case")');
-            assert.equal(changeCase.camelCase('this_is_an_example'), 'thisIsAnExample');
-        });
-    });
-
     describe('pascal case to camelCase', () => {
         it('converts Pascal case to camelCase', async () => {
             type Answer = CamelCase<'ThisIsAnExample'>;
@@ -128,13 +108,55 @@ describe('camelCase test', () => {
     });
 
     describe('path/case to camelCase', () => {
-        it('convert no case to camelCase', async () => {
+        it('convert path/case to camelCase', async () => {
             type Answer = CamelCase<'this/is/an/example'>;
             assert.equal(typia.random<Answer>(), 'thisIsAnExample');
             assert.equal(typia.random<ReturnType<typeof camelCase<'this/is/an/example'>>>(), 'thisIsAnExample');
 
             const changeCase = await eval('import("change-case")');
             assert.equal(changeCase.camelCase('this/is/an/example'), 'thisIsAnExample');
+        });
+    });
+
+    describe('Sentence case to camelCase', () => {
+        it('convert Sentence case to camelCase', async () => {
+            type Answer = CamelCase<'This is an example'>;
+            assert.equal(typia.random<Answer>(), 'thisIsAnExample');
+            assert.equal(typia.random<ReturnType<typeof camelCase<'This is an example'>>>(), 'thisIsAnExample');
+
+            const changeCase = await eval('import("change-case")');
+            assert.equal(changeCase.camelCase('This is an example'), 'thisIsAnExample');
+        });
+    });
+
+    describe('snake_case to camelCase', () => {
+        it('handles string with single underscore', async () => {
+            type Answer = CamelCase<'hello_world'>;
+            assert.equal(typia.random<Answer>(), 'helloWorld');
+            assert.equal(typia.random<ReturnType<typeof camelCase<'hello_world'>>>(), 'helloWorld');
+
+            const changeCase = await eval('import("change-case")');
+            assert.equal(changeCase.camelCase('hello_world'), 'helloWorld');
+        });
+
+        it('converts snake_case to camelCase', async () => {
+            type Answer = CamelCase<'this_is_an_example'>;
+            assert.equal(typia.random<Answer>(), 'thisIsAnExample');
+            assert.equal(typia.random<ReturnType<typeof camelCase<'this_is_an_example'>>>(), 'thisIsAnExample');
+
+            const changeCase = await eval('import("change-case")');
+            assert.equal(changeCase.camelCase('this_is_an_example'), 'thisIsAnExample');
+        });
+    });
+
+    describe('Train-Case to camelCase', () => {
+        it('convert Sentence case to camelCase', async () => {
+            type Answer = CamelCase<'This is an example'>;
+            assert.equal(typia.random<Answer>(), 'thisIsAnExample');
+            assert.equal(typia.random<ReturnType<typeof camelCase<'This is an example'>>>(), 'thisIsAnExample');
+
+            const changeCase = await eval('import("change-case")');
+            assert.equal(changeCase.camelCase('This is an example'), 'thisIsAnExample');
         });
     });
 });

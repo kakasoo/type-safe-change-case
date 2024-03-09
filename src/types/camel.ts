@@ -11,7 +11,7 @@ export type CamelCase<T extends string> = T extends ''
     : IsStringLiteral<T> extends true
       ? StringType.Includes<T, '_'> extends true // snake_case, Snake_Case
           ? Uncapitalize<StringArrayToPascalCase<StringType.Split<T, '_'>>>
-          : StringType.Includes<T, ' '> extends true // CAPITAL_CASE, no case
+          : StringType.Includes<T, ' '> extends true // CAPITAL_CASE, no case, Sentence case
             ? Uncapitalize<StringArrayToPascalCase<StringType.Split<T, ' '>>>
             : StringType.Includes<T, '.'> extends true // dot.case
               ? Uncapitalize<StringArrayToPascalCase<StringType.Split<T, '.'>>>
