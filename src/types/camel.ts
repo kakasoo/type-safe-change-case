@@ -19,5 +19,7 @@ export type CamelCase<T extends string> = T extends ''
             ? Uncapitalize<StringArrayToPascalCase<StringType.Split<T, ' '>>>
             : StringType.Includes<T, '.'> extends true // dot case
               ? Uncapitalize<StringArrayToPascalCase<StringType.Split<T, '.'>>>
-              : Uncapitalize<T>
+              : StringType.Includes<T, '-'> extends true // dot case
+                ? Uncapitalize<StringArrayToPascalCase<StringType.Split<T, '-'>>>
+                : Uncapitalize<T>
       : string;

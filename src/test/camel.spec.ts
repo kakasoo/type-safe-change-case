@@ -43,6 +43,15 @@ describe('camelCase test', () => {
             const changeCase = await eval('import("change-case")');
             assert.equal(changeCase.camelCase('hello_world'), 'helloWorld');
         });
+
+        it('converts snake_case to camelCase', async () => {
+            type Answer = CamelCase<'this_is_an_example'>;
+            assert.equal(typia.random<Answer>(), 'thisIsAnExample');
+            assert.equal(typia.random<ReturnType<typeof camelCase<'this_is_an_example'>>>(), 'thisIsAnExample');
+
+            const changeCase = await eval('import("change-case")');
+            assert.equal(changeCase.camelCase('this_is_an_example'), 'thisIsAnExample');
+        });
     });
 
     describe('pascal case to camelCase', () => {
@@ -65,15 +74,6 @@ describe('camelCase test', () => {
             const changeCase = await eval('import("change-case")');
             assert.equal(changeCase.camelCase('THIS_IS_AN_EXAMPLE'), 'thisIsAnExample');
         });
-
-        it('converts CONSTANT_CASE to camelCase', async () => {
-            type Answer = CamelCase<'this_is_an_example'>;
-            assert.equal(typia.random<Answer>(), 'thisIsAnExample');
-            assert.equal(typia.random<ReturnType<typeof camelCase<'this_is_an_example'>>>(), 'thisIsAnExample');
-
-            const changeCase = await eval('import("change-case")');
-            assert.equal(changeCase.camelCase('this_is_an_example'), 'thisIsAnExample');
-        });
     });
 
     describe('dto case to camelCase', () => {
@@ -93,6 +93,26 @@ describe('camelCase test', () => {
 
             const changeCase = await eval('import("change-case")');
             assert.equal(changeCase.camelCase('THIS.IS.AN.EXAMPLE'), 'thisIsAnExample');
+        });
+    });
+
+    describe('kebab-case to camelCase', () => {
+        it('convert KEBAB-CASE to camelCase', async () => {
+            type Answer = CamelCase<'THIS-IS-AN-EXAMPLE'>;
+            assert.equal(typia.random<Answer>(), 'thisIsAnExample');
+            assert.equal(typia.random<ReturnType<typeof camelCase<'THIS-IS-AN-EXAMPLE'>>>(), 'thisIsAnExample');
+
+            const changeCase = await eval('import("change-case")');
+            assert.equal(changeCase.camelCase('THIS-IS-AN-EXAMPLE'), 'thisIsAnExample');
+        });
+
+        it('convert kebab-case to camelCase', async () => {
+            type Answer = CamelCase<'this-is-an-example'>;
+            assert.equal(typia.random<Answer>(), 'thisIsAnExample');
+            assert.equal(typia.random<ReturnType<typeof camelCase<'this-is-an-example'>>>(), 'thisIsAnExample');
+
+            const changeCase = await eval('import("change-case")');
+            assert.equal(changeCase.camelCase('this-is-an-example'), 'thisIsAnExample');
         });
     });
 });
