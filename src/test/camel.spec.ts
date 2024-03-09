@@ -55,4 +55,15 @@ describe('camel case test', () => {
             assert.equal(changeCase.camelCase('ThisIsAnExample'), 'thisIsAnExample');
         });
     });
+
+    describe('constant case to camel case', () => {
+        it('converts CONSTANT_CASE to camel case', async () => {
+            type Answer = CamelCase<'THIS_IS_AN_EXAMPLE'>;
+            assert.equal(typia.random<Answer>(), 'thisIsAnExample');
+            assert.equal(typia.random<ReturnType<typeof camelCase<'THIS_IS_AN_EXAMPLE'>>>(), 'thisIsAnExample');
+
+            const changeCase = await eval('import("change-case")');
+            assert.equal(changeCase.camelCase('THIS_IS_AN_EXAMPLE'), 'thisIsAnExample');
+        });
+    });
 });

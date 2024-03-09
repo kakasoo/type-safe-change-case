@@ -8,11 +8,14 @@ export type SnakeToCamel<SnakeCase extends string> = Uncapitalize<
     StringArrayToPascalCase<StringType.Split<SnakeCase, '_'>>
 >;
 
-export type CamelCase<T extends string> =
-    IsStringLiteral<T> extends true
-        ? IsSnakeCase<T> extends true
-            ? SnakeToCamel<T>
-            : T extends ''
-              ? ''
-              : Uncapitalize<StringArrayToPascalCase<Split<T, ' '>>>
-        : string;
+export type CapitalToCamel<CapitalCase extends string> = Uncapitalize<StringArrayToPascalCase<Split<CapitalCase, ' '>>>;
+
+export type CamelCase<T extends string> = T extends ''
+    ? ''
+    : IsStringLiteral<T> extends true
+      ? IsSnakeCase<T> extends true
+          ? SnakeToCamel<T>
+          : StringType.Includes<T, ' '> extends true
+            ? Uncapitalize<StringArrayToPascalCase<StringType.Split<T, ' '>>>
+            : Uncapitalize<T>
+      : string;
