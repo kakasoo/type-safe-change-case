@@ -25,5 +25,3 @@ export type CamelCase<T extends string> = Uncapitalize<
         ? __CamelCase<__CamelCase<T>>
         : __CamelCase<T>
 >;
-
-type a = StringArrayToPascalCase<StringType.Split<'this_is_an-example', '-' | '_'>>;
