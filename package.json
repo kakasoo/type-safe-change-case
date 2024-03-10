@@ -33,7 +33,7 @@
     },
     "homepage": "https://github.com/kakasoo/type-safe-change-case#readme",
     "dependencies": {
-        "@kakasoo/proto-typescript": "^1.27.3",
+        "@kakasoo/proto-typescript": "^1.28.1",
         "change-case": "^5.4.3",
         "typia": "^5.5.3"
     },
